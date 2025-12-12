@@ -60,5 +60,3 @@ void loop()
   Ext.DoJetiSend();
 
 }
-
-//test de julien
