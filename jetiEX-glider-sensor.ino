@@ -1,5 +1,7 @@
+#include <BMP280_DEV.h>
+#include <Device.h>
 #include <JetiExProtocol.h>
-#include <BMP280.h>
+
 
 
 const byte idAlt = 1;
@@ -7,10 +9,12 @@ const byte idPress = 2;
 const byte idTemp = 3;
 
 
-word altitude;
-word pressure;
-word groundPressure;
-byte temp;
+float altitude;
+float pressure;
+float groundPressure;
+float trueAltitude;
+float temp;
+bool wait = false;
 
 
 JetiExProtocol Ext;
@@ -34,11 +38,27 @@ void setup()
 
   Ext.Start("Jeti Sensor", sensors );
 
-  Wire.begin();
-
   bmp.begin();
 
-  groundPressure = bmp.getPressure()*0.01;
+  bmp.setTimeStandby(TIME_STANDBY_2000MS);
+
+  bmp.startNormalConversion();
+
+  while (wait == false)
+
+    {
+
+      if (bmp.getMeasurements(temp, pressure, altitude))
+
+      {
+
+        groundAltitude = altitude;
+
+        wait = true;
+        
+      }
+      
+    }
 
 }
 
@@ -46,14 +66,11 @@ void loop()
 
 {
 
-  pressure = bmp.getPressure()*0.01;
+  bmp.getMeasurements(temp, pressure, altitude);
 
-  temp = bmp.getTemperature();
-
-
-  altitude = 44340 * (1.0 - pow(pressure / groundPressure, 0.1905));
+  trueAltitude = altitude-groundAltitude;
   
-  Ext.SetSensorValue(idAlt, altitude);
+  Ext.SetSensorValue(idAlt, trueAltitude);
   Ext.SetSensorValue(idPress, pressure);
   Ext.SetSensorValue(idTemp, temp);
 
