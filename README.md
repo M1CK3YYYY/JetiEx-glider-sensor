@@ -1,3 +1,5 @@
 # JetiEX-glider-sensor
 
-A small jeti compatible sensor for your gliders with altimeter.
+A small Arduino/jeti compatible sensor for your gliders with altimeter.
+
+This is a PoC and for now only tested and on arduino nano.
