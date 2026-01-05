@@ -5,15 +5,21 @@
 
 
 const byte idAlt = 1;
-const byte idPress = 2;
-const byte idTemp = 3;
+const byte idVario = 2;
+const byte idPress = 3;
+const byte idVbat = 4;
+const byte idTemp = 5;
 
 
 float altitude;
-float pressure;
-float groundPressure;
-float trueAltitude;
+word trueAltitude;
+float vario;
+word pressure;
 float temp;
+float vBat:
+float varioTimer;
+float sendTimer;
+
 bool wait = false;
 
 
@@ -25,9 +31,11 @@ JETISENSOR_CONST sensors[] PROGMEM =
 
 {
 
-  {idAlt,     "Altitude",     "m",       JetiSensor::TYPE_14b, 0},
-  {idPress,   "Pression",     "HPa",     JetiSensor::TYPE_14b, 0},
-  {idTemp,    "Temperature",  "\xB0",    JetiSensor::TYPE_14b, 0},
+  {idAlt,     "Altitude",            "m",       JetiSensor::TYPE_14b, 0},
+  {idVario,   "Vario",               "m",       JetiSensor::TYPE_14b, 1},
+  {idPress,   "Pression",            "HPa",     JetiSensor::TYPE_14b, 0},
+  {idVbat,    "Tension Batterie,     "V",       JetiSensir//TYPE_14b, 2},
+  {idTemp,    "Temperature",         "\xB0",    JetiSensor::TYPE_14b, 0},
   { 0 }
 
 };
@@ -46,19 +54,19 @@ void setup()
 
   while (wait == false)
 
+  {
+
+    if (bmp.getMeasurements(temp, pressure, altitude))
+
     {
 
-      if (bmp.getMeasurements(temp, pressure, altitude))
+      groundAltitude = altitude;
 
-      {
-
-        groundAltitude = altitude;
-
-        wait = true;
+      wait = true;
         
-      }
-      
     }
+      
+  }
 
 }
 
@@ -71,7 +79,9 @@ void loop()
   trueAltitude = altitude-groundAltitude;
   
   Ext.SetSensorValue(idAlt, trueAltitude);
+  Ext.setSensorValue(idVArio, vario);
   Ext.SetSensorValue(idPress, pressure);
+  Ext.SetSensorValue(idVbat, vBat);
   Ext.SetSensorValue(idTemp, temp);
 
   Ext.DoJetiSend();
