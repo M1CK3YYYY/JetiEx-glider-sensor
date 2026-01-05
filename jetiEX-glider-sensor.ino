@@ -84,7 +84,7 @@ void loop()
 
   vBat = map(rawVbat,0,1023,0,10);
 
-  bmp.getMeasurements(temp, pressure, altitude);
+  bmp.getCurrentMeasurements(temp, pressure, altitude);
 
   trueAltitude = altitude-groundAltitude;
 
