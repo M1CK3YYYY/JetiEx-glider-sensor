@@ -10,12 +10,15 @@ const byte idPress = 3;
 const byte idVbat = 4;
 const byte idTemp = 5;
 
+const byte pinVbat = 0:
+
 
 float altitude;
 word trueAltitude;
 float vario;
 word pressure;
 float temp;
+word rawVbat;
 float vBat:
 float varioTimer;
 float sendTimer;
@@ -73,6 +76,10 @@ void setup()
 void loop()
 
 {
+
+  rawVbat = analogRead(pinVbat);
+
+  vBat = map(rawVbat,0,1023,0,10)
 
   bmp.getMeasurements(temp, pressure, altitude);
 
