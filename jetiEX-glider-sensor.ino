@@ -50,6 +50,14 @@ void setup()
 
 {
 
+  Serial.begin(9600);
+
+  Serial.println("JetiEx-glider-sensor");
+  Serial.println("");
+  Serial.println("FW version : 0.0.0");
+
+  Serial.end();
+
   Ext.Start("Jeti Sensor", sensors );
 
   bmp.begin();
@@ -101,6 +109,5 @@ void loop()
     Ext.DoJetiSend();
 
   }
-  
   
 }
