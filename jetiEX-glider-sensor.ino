@@ -141,6 +141,8 @@ void loop()
 
     Ext.DoJetiSend();  //send data
 
+    sendTimer = millis(); //set timer
+
   }
   
 }
