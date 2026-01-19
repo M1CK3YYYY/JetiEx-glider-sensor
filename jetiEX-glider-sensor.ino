@@ -55,7 +55,7 @@ JETISENSOR_CONST sensors[] PROGMEM =
   {idAlt,     "Altitude",            "m",       JetiSensor::TYPE_14b, 0},
   {idVario,   "Vario",               "m",       JetiSensor::TYPE_14b, 1},
   {idPress,   "Pression",            "HPa",     JetiSensor::TYPE_14b, 0},
-  {idVbat,    "Tension Batterie",    "V",       JetiSensir::TYPE_14b, 2},
+  {idVbat,    "Tension Batterie",    "V",       JetiSensor::TYPE_14b, 2},
   {idTemp,    "Temperature",         "\xB0",    JetiSensor::TYPE_14b, 0},
   { 0 }
 
