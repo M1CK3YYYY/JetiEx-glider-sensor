@@ -13,12 +13,13 @@ float altitude;
 float pressure;
 float groundPressure;
 float trueAltitude;
+float groundAltitude;
 float temp;
 bool wait = false;
 
 
 JetiExProtocol Ext;
-BMP280 bmp;
+BMP280_DEV bmp;
 
 
 JETISENSOR_CONST sensors[] PROGMEM =
