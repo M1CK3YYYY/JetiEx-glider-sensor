@@ -69,14 +69,9 @@ void setup()
   
   Serial.begin(9600);
 
-  Serial.println("JetiEx-glider-sensor");
-  Serial.println("");
-  Serial.println("FW version : 0.0.0");
+  Serial.println("JetiEx-glider-sensor\r\nFW version : 0.0.0");
 
   Serial.end();
-  
-
-  delay(500); //delay between serial end and ext start 
 
   Ext.Start("Jeti Sensor", sensors );  //start comunication with Rx
 
