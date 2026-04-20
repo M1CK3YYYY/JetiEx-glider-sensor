@@ -23,10 +23,10 @@ const word sendDelay = 500;  //Const for send delay
 
 //Measurment variables
 
-float altitude;
-unsigned int trueAltitude;
-unsigned int groundAltitude;
-float vario;
+float altitude;                 //raw altitude from BMP
+unsigned int trueAltitude;      //net altitude (raw-ground)
+unsigned int groundAltitude;    //groud altitude (first measure from BMP)
+float vario;                    //vertical speed
 float pressure;
 float temp;
 unsigned int rawVbat;
